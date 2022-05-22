@@ -5,6 +5,12 @@ export default class Comment extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column()
+  public username: string
+
+  @column()
+  public text: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
