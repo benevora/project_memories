@@ -33,7 +33,7 @@ export default class MomentsController {
     response.status(201)
 
     return {
-      message: "Momento criado com sucesso!",
+      message: "Moment created successfully!",
       data: moment,
     }
   }
@@ -66,7 +66,7 @@ export default class MomentsController {
     await moment.delete()
     
     return {
-      message: "Momento excluido com sucesso!",
+      message: "Successfully deleted moment!",
       data: moment,
     }
   }
@@ -98,7 +98,7 @@ export default class MomentsController {
 
 
     return {
-      message: "Momento atuaizado com sucesso!",
+      message: "Moment updated successfully!",
       data: moment,
     }
 
