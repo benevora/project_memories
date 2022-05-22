@@ -13,7 +13,7 @@ export default class MomentsController {
   }
   
   // route to create moments
-  public async store({request, response}: HttpContextContract) {
+  public async store({ request, response }: HttpContextContract) {
     const body = request.body()
 
     const image = request.file('image', this.validationOptions)
@@ -41,7 +41,7 @@ export default class MomentsController {
 
   // route to Get all moments
   public async index() {
-    const moments = await Moment.all()
+    const moments = await Moment.query().preload("comments")
 
     return {
       data: moments,
@@ -49,8 +49,10 @@ export default class MomentsController {
   }
 
   // route to Get a single individual moment
-  public async show({params}: HttpContextContract) {
+  public async show({ params }: HttpContextContract) {
     const moment = await Moment.findOrFail(params.id)
+
+    await moment.load("comments")
     
     return {
       data: moment,
@@ -58,7 +60,7 @@ export default class MomentsController {
   }
 
   // route to delete a moment
-  public async destroy({params}: HttpContextContract) {
+  public async destroy({ params }: HttpContextContract) {
     const moment = await Moment.findOrFail(params.id)
 
     await moment.delete()
@@ -70,7 +72,7 @@ export default class MomentsController {
   }
 
   // route to update moments
-  public async update({params, request}: HttpContextContract) {
+  public async update({ params, request }: HttpContextContract) {
     const body = request.body()
 
     const moment = await Moment.findOrFail(params.id)
